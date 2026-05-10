@@ -1,0 +1,40 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+.vendor/
+.venv/
+venv/
+.matplotlib/
+
+# Large datasets and generated caches
+*.csv
+*.pkl
+data/**/*.csv
+data/**/*.pkl
+!data/gra_bi/
+!data/gra_bi/*.txt
+!data/mos2_mono/
+!data/mos2_mono/*.txt
+
+# Generated evaluation outputs, plots, and logs
+*.npz
+*.png
+!logo.png
+*.err
+*.out
+out*.txt
+eval_exports/
+outputs/
+!test_graphene/**/outputs/
+!test_graphene/**/outputs/*.png
+!test_graphene/**/outputs/*.csv
+!test_graphene/**/reference/*.csv
+!test_mos2/**/outputs/
+!test_mos2/**/outputs/*.png
+!test_mos2/**/outputs/*.csv
+!test_mos2/**/reference/*.csv
+test_mos2/**/outputs/phonon_cache/
+
+# Excluded source-project experiment folders
+test_gra/
+test_graphene/finite_T/outputs/

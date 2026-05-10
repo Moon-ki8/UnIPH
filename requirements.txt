@@ -1,0 +1,9 @@
+torch
+torch-geometric
+torch-scatter
+e3nn
+ase
+numpy
+pandas
+matplotlib
+tqdm
