@@ -13,7 +13,7 @@ def _resolve_path(config_dir, path_value):
     return os.path.abspath(os.path.join(config_dir, path_value))
 
 
-def load_and_validate_config(config_path):
+def load_and_validate_config(config_path, require_data_files=True):
     parser = configparser.ConfigParser()
     read_files = parser.read(config_path)
     if len(read_files) == 0:
@@ -119,12 +119,13 @@ def load_and_validate_config(config_path):
     if training_cfg['batch_size'] != 1:
         raise ValueError('PLAN_01 requires batch_size=1.')
 
-    file_keys = ['csv_path', 'train_idx_path', 'test_idx_path']
-    for key in file_keys:
-        if not os.path.isfile(data_cfg[key]):
-            raise FileNotFoundError(f'Missing required file for {key}: {data_cfg[key]}')
+    if require_data_files:
+        file_keys = ['csv_path', 'train_idx_path', 'test_idx_path']
+        for key in file_keys:
+            if not os.path.isfile(data_cfg[key]):
+                raise FileNotFoundError(f'Missing required file for {key}: {data_cfg[key]}')
 
-    if not os.path.isdir(data_cfg['data_dir']):
+    if require_data_files and not os.path.isdir(data_cfg['data_dir']):
         raise FileNotFoundError(f'Missing data_dir: {data_cfg["data_dir"]}')
 
     return {

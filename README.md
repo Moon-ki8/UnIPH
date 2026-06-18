@@ -56,6 +56,24 @@ Generated `.pkl` caches are intentionally not tracked in git.
 Run these examples from the repository root. They use the included graphene
 checkpoint; use `load_mos2_model` with a MoS2 structure for the MoS2 checkpoint.
 
+Relax a structure with FIRE:
+
+```python
+import ase.io
+from ase.optimize import FIRE
+
+from utils.utils_calculator import UnIPHCalculator, load_graphene_model
+
+atoms = ase.io.read("test_graphene/finite_T/structures/graphene_2x2_initial.xyz")
+context = load_graphene_model(device="cpu")
+atoms.calc = UnIPHCalculator(context)
+
+relax = FIRE(atoms)
+relax.run(fmax=0.05, steps=100)
+
+print("Relaxed energy:", atoms.get_potential_energy())
+```
+
 Use UnIPH as an ASE calculator for molecular dynamics:
 
 ```python

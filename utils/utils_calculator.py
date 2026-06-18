@@ -46,7 +46,7 @@ def load_uniph_model(config_path, checkpoint_path=None, device=None):
     if not config_path.is_absolute():
         config_path = UNIPH_ROOT / config_path
 
-    cfg = load_and_validate_config(config_path)
+    cfg = load_and_validate_config(config_path, require_data_files=False)
     model_cfg = cfg["model"]
     data_cfg = cfg["data"]
 
