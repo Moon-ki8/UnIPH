@@ -12,13 +12,13 @@ import ase.io
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import torch
 
 from utils.utils_calculator import UnIPHCalculator, load_graphene_model
+from utils.utils_device import resolve_device
 
 
 # Calculation settings. GRID_N controls the UnIPH sliding grid resolution.
-DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
+DEVICE = resolve_device("auto")
 GRID_N = 20
 
 # Input/output paths are kept local to this test folder so the script can be

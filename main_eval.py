@@ -17,6 +17,7 @@ from utils.utils_data import (
     graph_build,
     load_data,
 )
+from utils.utils_device import resolve_device
 from utils.utils_eval import compute_mae_summary, evaluate_datasets, save_eval_results_npz
 from utils.utils_irreps import run_irreps_parity_checks
 from utils.utils_model import e3net
@@ -40,10 +41,7 @@ data_cfg = cfg['data']
 training_cfg = cfg['training']
 settings_cfg = cfg['settings']
 
-if torch.cuda.is_available():
-    device = settings_cfg['device']
-else:
-    device = 'cpu'
+device = resolve_device(settings_cfg['device'])
 
 print(f'Using config: {config_path}')
 print(f'Using device: {device}')

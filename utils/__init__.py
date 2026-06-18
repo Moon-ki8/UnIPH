@@ -7,3 +7,4 @@ from utils.utils_calculator import (
     predict_ip,
     predict_tb,
 )
+from utils.utils_device import resolve_device

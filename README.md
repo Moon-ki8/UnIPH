@@ -127,6 +127,18 @@ python main_eval.py gnn_config_mos2.ini
 
 Graphene uses the same commands with `gnn_config_graphene.ini`.
 
+Device selection is controlled by the `[Settings]` section in each `.ini` file:
+
+```ini
+[Settings]
+device = auto
+```
+
+`auto` uses CUDA when available and otherwise falls back to CPU. You can also set
+`device = cpu` or a CUDA device such as `device = cuda:0`. PyTorch MPS on Mac is
+not used because UnIPH currently runs with `torch.float64`, which MPS does not
+support.
+
 Or run the full sequence:
 
 ```bash

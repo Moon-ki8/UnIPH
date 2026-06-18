@@ -12,13 +12,13 @@ import ase.io
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import torch
 
 from utils.utils_calculator import load_mos2_model, predict_tb
+from utils.utils_device import resolve_device
 
 
 # Calculation settings. The path follows the archive MoS2 comparison: G-M-K-G.
-DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
+DEVICE = resolve_device("auto")
 KPTS = 30
 
 # Input/output paths are local to this test folder.

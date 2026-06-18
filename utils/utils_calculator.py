@@ -18,16 +18,11 @@ from utils.utils_data import (
     graph_build_single,
     h_e3nn_to_tb,
 )
+from utils.utils_device import resolve_device
 from utils.utils_model import e3net
 
 
 torch.set_default_dtype(torch.float64)
-
-
-def _select_device(device=None):
-    if device is not None:
-        return device
-    return "cuda:0" if torch.cuda.is_available() else "cpu"
 
 
 def _normalize_legacy_state_dict(state):
@@ -41,7 +36,6 @@ def _normalize_legacy_state_dict(state):
 
 
 def load_uniph_model(config_path, checkpoint_path=None, device=None):
-    device = _select_device(device)
     config_path = Path(config_path)
     if not config_path.is_absolute():
         config_path = UNIPH_ROOT / config_path
@@ -49,6 +43,7 @@ def load_uniph_model(config_path, checkpoint_path=None, device=None):
     cfg = load_and_validate_config(config_path, require_data_files=False)
     model_cfg = cfg["model"]
     data_cfg = cfg["data"]
+    device = resolve_device(device if device is not None else cfg["settings"]["device"])
 
     type_encoding, _, am_onehot = build_atom_encoders(dtype=torch.float64)
     orbital_edges, pair_to_code = build_orbital_edges_and_codes(model_cfg["orbital_types"])

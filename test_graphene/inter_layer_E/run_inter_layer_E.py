@@ -12,14 +12,14 @@ import ase.io
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import torch
 
 from utils.utils_calculator import UnIPHCalculator, load_graphene_model
+from utils.utils_device import resolve_device
 
 
 # Calculation settings. The script scans vertical layer spacing for three
 # stacking registries and compares the relative energy curves with DFT.
-DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
+DEVICE = resolve_device("auto")
 D_MIN = 3.4
 D_MAX = 3.8
 N_POINTS = 20

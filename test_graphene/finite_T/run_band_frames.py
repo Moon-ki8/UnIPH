@@ -16,13 +16,13 @@ import ase.io
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import torch
 
 from utils.utils_calculator import load_graphene_model, predict_tb
+from utils.utils_device import resolve_device
 
 
 # Band settings. The MD trajectory has 100 frames; this samples every 5th frame.
-DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
+DEVICE = resolve_device("auto")
 BAND_EVERY = 5
 KPTS = 40
 Y_LIMIT = (-9.0, 12.0)

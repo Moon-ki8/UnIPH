@@ -12,14 +12,14 @@ import ase.io
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import torch
 
 from utils.utils_calculator import load_graphene_model, predict_tb
+from utils.utils_device import resolve_device
 
 
 # Calculation settings. KPTS is the approximate number of sampled k-points along
 # the full M-Gamma-K-M path.
-DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
+DEVICE = resolve_device("auto")
 KPTS = 40
 DFT_ENERGY_SHIFT = 0.5
 UNIPH_ENERGY_SCALE = 1.05

@@ -16,10 +16,11 @@ import numpy as np
 import torch
 
 from utils.utils_calculator import UnIPHCalculator, load_graphene_model
+from utils.utils_device import resolve_device
 
 
 # Finite-temperature settings.
-DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
+DEVICE = resolve_device("auto")
 TEMPERATURE_K = 300
 TIME_STEP_FS = 0.5
 N_STEPS = 100

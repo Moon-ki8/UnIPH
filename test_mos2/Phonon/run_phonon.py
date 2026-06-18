@@ -13,13 +13,13 @@ from ase.phonons import Phonons
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import torch
 
 from utils.utils_calculator import UnIPHCalculator, load_mos2_model
+from utils.utils_device import resolve_device
 
 
 # Calculation settings from the archive MoS2 phonon script.
-DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
+DEVICE = resolve_device("auto")
 SUPERCELL = (3, 3, 1)
 DELTA = 0.01
 KPTS = 40
